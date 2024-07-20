@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url('../public/img/background_app.png');
+  background-image: url('../public/img/background_app.png') !important;
   background-position: center;
   background-size: cover;
 }
@@ -89,5 +89,17 @@ label {
 
 .ant-table-cell {
   background-color: transparent !important;
+}
+
+.ant-menu-item {
+  color: #ffffff !important;
+}
+
+.ant-menu-item-selected {
+  color: #0B0B3B !important;
+}
+
+.ant-menu-submenu-title{
+  color: #a57f00 !important;
 }
 

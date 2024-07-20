@@ -5,14 +5,14 @@ import { getEncodeAvatarUsuario } from '../../utils/UtilsSistema';
 
 export default class AuthUtils {
   static prepareDataUser = (data: UserType) => {
-    const dadosUsuario = data;
+    const dadosUsuario : any = data;
     if (dadosUsuario && dadosUsuario.cpf) {
       /*dadosUsuario.icon = `${
         urlsServices.SIGUWS
       }icon?u=${getEncodeAvatarUsuario(dadosUsuario.cpf, '_80')}`;*/
       if (dadosUsuario.perfis) {
         const thisPerfis: string[] = [];
-        dadosUsuario.perfis.forEach((perfil, index) => {
+        dadosUsuario.perfis.forEach((perfil: any, index: number) => {
           if (
             perfil.sistema.descricao.toUpperCase() ===
             sistemaName.toUpperCase()

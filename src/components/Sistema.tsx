@@ -44,22 +44,55 @@ import BoasVindas from "./BoasVindas";
 import ComponentOffLine from "./ComponentOffLine";
 import Redirecionamento from "./Redirecionamento";
 import Sider from "antd/es/layout/Sider";
+import BgSistema from "../assets/background_app.png";
 
-//Load lazy module fundation
-const PessoaFisica = React.lazy(
-  async () =>
-    await import("pessoafisica/PessoaFisica").catch(() => {
-      return { default: () => <ComponentOffLine /> };
-    })
-);
+const host = window.location.host;
 
-//Load lazy module fundation
-const PessoaJuridica = React.lazy(
-  async () =>
-    await import("pessoajuridica/PessoaJuridica").catch(() => {
-      return { default: () => <ComponentOffLine /> };
+let PessoaFisica = React.lazy(async () => {
+  return await import("pessoafisicadesv/FazendaInfoPF").catch(() => {
+    return { default: () => <ComponentOffLine />}
+  })
+});
+let PessoaJuridica = React.lazy(async () => {
+  return await import("pessoajuridicadesv/FazendaInfoPJ").catch(() => {
+    return { default: () => <ComponentOffLine />}
+  })
+});
+
+if(host === "localhost:8181"){
+  PessoaFisica = React.lazy(async () => {
+    return await import("pessoafisicadesv/FazendaInfoPF").catch(() => {
+      return { default: () => <ComponentOffLine />}
     })
-);
+  });
+  PessoaJuridica = React.lazy(async () => {
+    return await import("pessoajuridicadesv/FazendaInfoPJ").catch(() => {
+      return { default: () => <ComponentOffLine />}
+    })
+  });
+} else if(host === "fazendainfo.rdca.com.br"){
+  PessoaFisica = React.lazy(async () => {
+    return await import("pessoafisicahomo/FazendaInfoPF").catch(() => {
+      return { default: () => <ComponentOffLine />}
+    })
+  });
+  PessoaJuridica = React.lazy(async () => {
+    return await import("pessoajuridicahomo/FazendaInfoPJ").catch(() => {
+      return { default: () => <ComponentOffLine />}
+    })
+  });
+} else {
+  PessoaFisica = React.lazy(async () => {
+    return await import("pessoafisicaprod/FazendaInfoPF").catch(() => {
+      return { default: () => <ComponentOffLine />}
+    })
+  });
+  PessoaJuridica = React.lazy(async () => {
+    return await import("pessoajuridicaprod/FazendaInfoPJ").catch(() => {
+      return { default: () => <ComponentOffLine />}
+    })
+  });
+}
 
 const { Header, Content, Footer } = Layout;
 
@@ -89,6 +122,7 @@ type Menu = {
 };
 
 export const Sistema = () => {
+
   const auth = useAuth();
   const {
     token: { colorBgContainer },
@@ -177,43 +211,6 @@ export const Sistema = () => {
     }
     setItemsMenu(items);
   };
-
-  /*const getUnidades = () => {
-    const unidadex = auth?.user?.unidade;
-    const unidadesx = auth?.user?.unidadesDeTrabalho;
-    const unidadeN: any = [];
-    unidadeN.push({ nome: unidadex?.nome, codigo: unidadex?.id });
-    unidadesx?.map((item: any) => {
-      if (unidadex?.id !== item.unidadeId) {
-        unidadeN.push({ nome: item.unidadeNome, codigo: item.unidadeId });
-      }
-    });
-    setUnidades(unidadeN);
-
-    if (
-      localStorage.getItem("localId") &&
-      localStorage.getItem("localId") !== "0" &&
-      localStorage.getItem("localId") !== ""
-    ) {
-      setUnidade({
-        nome: localStorage.getItem("localNome")!,
-        codigo: parseInt(localStorage.getItem("localId")!),
-      });
-    } else {
-      if (unidadex !== undefined) {
-        localStorage.setItem("localId", unidadex!.id!.toString());
-        localStorage.setItem("localNome", unidadex!.nome!);
-        setUnidade({ codigo: unidadex!.id!, nome: unidadex!.nome! });
-      } else {
-        localStorage.setItem("localId", "0");
-        localStorage.setItem("localNome", "Clique aqui e selecione.");
-        setUnidade({
-          codigo: 0,
-          nome: "Clique aqui e selecione.",
-        });
-      }
-    }
-  };*/
 
   const openModalSelectUnidade = () => {
     //setOpenModalUnidade(true);

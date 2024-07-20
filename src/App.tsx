@@ -10,9 +10,10 @@ import "./index.css";
 const App = () => {
   const auth = useAuth();
 
-  console.log("Usuario validado: ", auth?.validado);
+  const host = window.location.host === "localhost:8181" ? `http://${window.location.host}` : `https://${window.location.host}`;
 
   return (
+    <div style={{ height: "100vh", backgroundImage: `url('${host}/img/background_app.png')`, backgroundPosition: "center", backgroundSize: "cover" }}>
     <ConfigProvider
       locale={ptBR}
       theme={{
@@ -26,6 +27,7 @@ const App = () => {
         <MyRoutes />
       </AuthProvider>
     </ConfigProvider>
+    </div>
   );
 };
 const rootElement = document.getElementById("app");

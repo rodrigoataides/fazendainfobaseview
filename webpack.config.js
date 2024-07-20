@@ -9,7 +9,7 @@ dotenv.config("./.env");
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: process.env.PUBLICPATH,
+    publicPath: "auto",
   },
 
   resolve: {
@@ -41,6 +41,24 @@ module.exports = (_, argv) => ({
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192, // Tamanho limite em bytes para converter para data URL. Ajuste conforme necessário.
+              name: 'images/[name].[hash:8].[ext]', // Caminho e nome do arquivo de saída.
+            },
+          },
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'images/[name].[hash:8].[ext]', // Caminho e nome do arquivo de saída.
+            },
+          },
+        ],
+      },
     ],
   },
 
@@ -50,8 +68,15 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {
         //sso: process.env.SSO,
-        pessoafisica: process.env.PESSOAFISICA,
-        pessoajuridica: process.env.PESSOAJURIDICA,
+        //pessoa fisica
+        pessoafisicadesv: "pessoafisica@http://localhost:3031/remoteEntry.js",
+        pessoafisicahomo: "pessoafisica@https://fazendainfopf.rdca.com.br/remoteEntry.js",
+        pessoafisicaprod: "pessoafisica@https://fazendainfopf.com.br/remoteEntry.js",
+
+        //pessoa juridica
+        pessoajuridicadesv: "pessoajuridica@http://localhost:3032/remoteEntry.js",
+        pessoajuridicahomo: "pessoajuridica@https://fazendainfopj.rdca.com.br/remoteEntry.js",
+        pessoajuridicaprod: "pessoajuridica@https://fazendainfopj.com.br/remoteEntry.js",
       },
       exposes: {},
       shared: {

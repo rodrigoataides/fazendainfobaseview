@@ -15,7 +15,6 @@ import ComponentOffLine from "./ComponentOffLine";
 
 const MyRoutes = () => {
   const auth = useAuth();
-  console.log(auth?.validado);
   return (
     <BrowserRouter>
       <Routes>

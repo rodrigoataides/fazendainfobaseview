@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Card, Col, Row, Spin } from "antd";
 
 export const ComponentOffLine = () => {
+  const host = window.location.host === 'localhost:8181' ? `http://${window.location.host}` : `https://${window.location.host}`;
   return (
     <Row style={{ paddingInline: "20%" }}>
       <Col>
         <Row style={{ display: "flex", justifyContent: "center" }}>
-          <img src={"/img/LOGO TELA LOGIN.png"} />
+          <img src={`${host}/img/logo_tela_login.png`} />
         </Row>
         <Card style={{ marginTop: 20 }}>
           <Row

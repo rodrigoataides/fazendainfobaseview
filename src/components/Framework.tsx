@@ -22,14 +22,14 @@ type Menu = {
   children: [];
 };
 
-export const Framework = ({
+export const Framework = (/*{
   nomeSis,
   descricaoSis,
   menus,
   breadcrumb,
   children,
   onChangeMenu,
-}: Props) => {
+}: Props*/) => {
   const auth = useAuth();
   /*auth?.setVariaveisSis({
     nomeSis: nomeSis,
@@ -55,12 +55,12 @@ export const Framework = ({
               <Route path='/*' element={<Sistema />} />
               </Routes>*/}
         <MyRoutes
-          nomeSis={nomeSis}
+          /*nomeSis={nomeSis}
           descricaoSis={descricaoSis}
           menus={menus}
           breadcrumb={breadcrumb}
           children={children}
-          onChangeMenu={onChangeMenu}
+          onChangeMenu={onChangeMenu}*/
         />
       </AuthProvider>
     </ConfigProvider>
